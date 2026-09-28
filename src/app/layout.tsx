@@ -13,7 +13,15 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+// On Vercel the production URL is provided automatically; set SITE_URL for any other host.
+const siteUrl =
+  process.env.SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Walkthrough | Inspection reports that write themselves",
   description:
     "Walk the property, tap a condition and take photos as you go. The owner report is written before you reach the car.",
