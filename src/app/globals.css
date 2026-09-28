@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+:root {
+  --teal: #0f5257;
+  --teal-lift: #17726f;
+  --on-teal: #ffffff;
+  --band: #0f5257;
+  --paper: #eff3f2;
+  --surface: #ffffff;
+  --surface-2: #f7faf9;
+  --ink: #121d1d;
+  --ink-soft: #546361;
+  --ink-faint: #879996;
+  --line: #d5dedc;
+  --line-soft: #e6ecea;
+  --good: #2e7d52;
+  --good-wash: #e4f2ea;
+  --fair: #a87512;
+  --fair-wash: #f8efdc;
+  --attn: #c05a1e;
+  --attn-wash: #fbebdf;
+  --dmg: #b3392c;
+  --dmg-wash: #fae6e3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --teal: #4fb3ae;
+    --teal-lift: #63c9c0;
+    --on-teal: #07201f;
+    --band: #0a1c1e;
+    --paper: #0d1516;
+    --surface: #141f20;
+    --surface-2: #182627;
+    --ink: #e6edec;
+    --ink-soft: #9bb0ad;
+    --ink-faint: #6e8481;
+    --line: #26383a;
+    --line-soft: #1d2c2e;
+    --good: #5fc08c;
+    --good-wash: #122b1f;
+    --fair: #d9a73f;
+    --fair-wash: #2c2414;
+    --attn: #e8875a;
+    --attn-wash: #2e1c12;
+    --dmg: #e86f60;
+    --dmg-wash: #2e1513;
+  }
+}
+
+@theme inline {
+  --color-teal: var(--teal);
+  --color-teal-lift: var(--teal-lift);
+  --color-on-teal: var(--on-teal);
+  --color-band: var(--band);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-good: var(--good);
+  --color-good-wash: var(--good-wash);
+  --color-fair: var(--fair);
+  --color-fair-wash: var(--fair-wash);
+  --color-attn: var(--attn);
+  --color-attn-wash: var(--attn-wash);
+  --color-dmg: var(--dmg);
+  --color-dmg-wash: var(--dmg-wash);
+  --font-sans: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@utility site-wrap {
+  width: min(78rem, 100% - 2rem);
+  margin-inline: auto;
+}
+
+@utility label-caps {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1.5px solid transparent;
+    border-radius: 5px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-primary { background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
+  .btn-primary:hover:not(:disabled) { background: var(--teal-lift); border-color: var(--teal-lift); }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--teal); color: var(--teal); }
+  .btn-sm { padding: 0.4rem 0.7rem; font-size: 0.8rem; }
+
+  .field {
+    border: 1.5px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: 0.55rem 0.7rem;
+    font-size: 1rem;
+  }
+  .field:focus { outline: none; border-color: var(--teal); background: var(--surface); }
+
+  /* Stand-ins for photos in the sample property */
+  .swatch-moss { background: linear-gradient(150deg, #5c6b57 0%, #c3cbae 100%); }
+  .swatch-timber { background: linear-gradient(150deg, #6a5f52 0%, #d3c7b2 100%); }
+  .swatch-slate { background: linear-gradient(150deg, #4c6470 0%, #bfd0d6 100%); }
+  .swatch-sand { background: linear-gradient(150deg, #6e5b44 0%, #dcc9a8 100%); }
+  .swatch-sage { background: linear-gradient(150deg, #4f5a52 0%, #c6d2c4 100%); }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #121d1d; }
+  .print-flat { border: 0 !important; margin: 0 !important; }
+  .print-band { background: #0f5257 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Very large screens: scale the whole layout up proportionally instead of leaving a
+   narrow column floating in the middle. Breakpoints are unaffected — media queries
+   measure against the browser's default size, not this one. */
+@media (width >= 1800px) {
+  html { font-size: 112.5%; }
+}
+@media (width >= 2300px) {
+  html { font-size: 125%; }
+}
